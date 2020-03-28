@@ -1,8 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'
+import { ConfigService } from './services/config.service';
+
+const appConfig = (config: ConfigService) => {
+  return () => {
+    return config.loadConfigJSON();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -10,9 +18,17 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ConfigService, {
+      provide: APP_INITIALIZER,
+      useFactory: appConfig, 
+      multi: true,
+      deps: [ConfigService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

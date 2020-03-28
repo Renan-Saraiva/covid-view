@@ -1,0 +1,9 @@
+{
+    "rapidAPI" : {
+        "url": "https://coronavirus-monitor.p.rapidapi.com/coronavirus",
+        "headers": {
+            "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+            "x-rapidapi-key": "f7fe98f30bmshf57b8271185ccb4p18576ajsn43e0524d33f8"
+        }
+    }
+}
