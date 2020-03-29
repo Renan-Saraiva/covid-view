@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CoronaMonitorService } from './services/corona-monitor.service';
+import { WorldTotalState } from './models/world-total-state';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'covid-view';
 
-  constructor() {
+  worldStatus: WorldTotalState;
 
+  constructor(private coronaMonitor: CoronaMonitorService) {    
+    coronaMonitor.GetWorldTotalState().subscribe(
+      (response) => this.worldStatus = response
+    );        
   }
 }

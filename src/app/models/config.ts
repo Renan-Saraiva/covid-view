@@ -1,8 +1,8 @@
-export class Config {
-    public rapidAPI: RapidAPI;
+export interface Config {
+    rapidAPI: RapidAPI;
 }
 
-export class RapidAPI {
-    public url: string;
-    public headers: any;
+export interface RapidAPI {
+    url: string;
+    headers: any;
 }

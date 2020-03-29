@@ -1,1 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
+.content-wrapper, .main-header, .main-footer {
+    margin-left: 0px !important;
+}

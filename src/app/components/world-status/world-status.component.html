@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-info">
+            <div class="overlay dark" *ngIf="isLoading">
+                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+            </div>
+            <div class="inner">
+                <h3>{{ worldStatus.new_cases | number: '':'pt' }}</h3>
+                <p>Novos casos</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-hospital-user"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-warning">
+            <div class="overlay dark" *ngIf="isLoading">
+                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+            </div>
+            <div class="inner">
+                <h3>{{ worldStatus.total_cases }}</h3>
+                <p>Total de infectados</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-diagnoses"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-success">
+            <div class="overlay dark" *ngIf="isLoading">
+                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+            </div>
+            <div class="inner">
+                <h3>{{ worldStatus.total_recovered }}</h3>
+                <p>Recuperados</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-smile"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+            <div class="overlay dark" *ngIf="isLoading">
+                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+            </div>
+            <div class="inner">
+                <h3>{{ worldStatus.total_deaths }} </h3>
+                <p>Total de mortes</p>
+            </div>
+            <div class="icon">
+                <i class="far fa-dizzy"></i>
+            </div>
+        </div>
+    </div>
+</div>

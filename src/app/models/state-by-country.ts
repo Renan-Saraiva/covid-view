@@ -1,4 +1,4 @@
-export class LatestStatByCountry {
+export interface StateByCountry {
     id: string;
     country_name: string;
     total_cases: string;
@@ -13,7 +13,7 @@ export class LatestStatByCountry {
     record_date: string;
 }
 
-export class LatestStatByCountryCollection {
+export interface StateByCountryCollection {
     country: string;
-    latest_stat_by_country: LatestStatByCountry[];
+    latest_stat_by_country: StateByCountry[];
 }
