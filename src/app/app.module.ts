@@ -8,13 +8,14 @@ import { ConfigService } from './services/config.service';
 import { AppHeaderComponent } from './layout/app-header/app-header.component';
 import { AppFooterComponent } from './layout/app-footer/app-footer.component';
 import { WorldStatusComponent } from './components/world-status/world-status.component';
-import { CountryPickComponent } from './components/country-pick/country-pick.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CountryComponent } from './pages/country/country.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { CountriesService } from './services/countries.service';
+import { WorldViewComponent } from './components/world-view/world-view.component';
+import { TopAffectedCountriesComponent } from './components/top-affected-countries/top-affected-countries.component';
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -37,9 +38,10 @@ registerLocaleData(localePt, 'pt');
     AppHeaderComponent,
     AppFooterComponent,
     WorldStatusComponent,
-    CountryPickComponent,
     HomeComponent,
-    CountryComponent
+    CountryComponent,
+    WorldViewComponent,
+    TopAffectedCountriesComponent
   ],
   imports: [
     BrowserModule,

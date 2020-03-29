@@ -19,13 +19,19 @@ export class WorldStatusComponent implements OnInit {
 
   isLoading = true;
 
-  constructor(private coronaMonitorServices: CoronaMonitorService) { }
+  constructor(private monitorService: CoronaMonitorService) { }
 
   ngOnInit() {
-    this.coronaMonitorServices.GetWorldTotalState().subscribe((worldStatus) => {
-      this.worldStatus = worldStatus;
-      this.isLoading = false;
-    });
+    this.loadWorldTotalState();
+  }
+
+  loadWorldTotalState() {
+    this.monitorService.GetWorldTotalState().subscribe(
+      (worldStatus) => {
+        this.worldStatus = worldStatus;
+        this.isLoading = false;
+      }
+    );
   }
 
 }

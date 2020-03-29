@@ -19,12 +19,25 @@ export class CountriesService {
   }
   
   public getCountryByInternationalName(name: string) : Country {
-    name = name.toLocaleLowerCase();    
+
+    if (name == "USA")
+      name = "United States";
+
+    if (name == "UK")
+      name = "United Kingdom";
+
+    if (name == "CAR")
+      name = "Central African Republic";
+
+    if (name == "DRC")
+      name = "Congo (DRC)";
+
+    name = name.toLocaleLowerCase();
     return this.countries.find(item => item.nome_pais_int.toLowerCase() == name);
   }
 
   public getCountryByBrazilianName(name: string) : Country {
-    name = name.toLocaleLowerCase();   
+    name = name.toLocaleLowerCase();
     return this.countries.find(item => item.nome_pais.toLocaleLowerCase() == name);
   }
   

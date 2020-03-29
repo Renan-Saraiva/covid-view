@@ -10,3 +10,7 @@ export interface CasesByCountry {
     active_cases: string;
     total_cases_per_1m_population: string;
 }
+
+export interface CasesByCountryContainer {
+    countries_stat: CasesByCountry[];
+}

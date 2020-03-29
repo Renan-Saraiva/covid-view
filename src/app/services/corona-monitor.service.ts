@@ -4,7 +4,7 @@ import { ConfigService } from './config.service';
 import { RapidAPI } from '../models/config';
 import { WorldTotalState } from '../models/world-total-state';
 import { StateByCountryCollection } from '../models/state-by-country';
-import { CasesByCountry } from '../models/cases-by-country';
+import { CasesByCountryContainer } from '../models/cases-by-country';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class CoronaMonitorService {
   }
 
   public GetCasesAllCountry() {
-    return this.httpClient.get<CasesByCountry[]>(
+    return this.httpClient.get<CasesByCountryContainer>(
       this.apiConfig.url + '/cases_by_country.php', { 
         headers: this.headers
       }
