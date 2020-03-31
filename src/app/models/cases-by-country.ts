@@ -1,14 +1,14 @@
-export interface CasesByCountry {
+export class CasesByCountry {
     country_name: string;
     cases: string;
-    deaths: string;
+    deaths: number;
     region: string;
-    total_recovered: string;
-    new_deaths: string;
-    new_cases: string;
-    serious_critical: string;
-    active_cases: string;
-    total_cases_per_1m_population: string;
+    total_recovered: number;
+    new_deaths: number;
+    new_cases: number;
+    serious_critical: number;
+    active_cases: number;
+    total_cases_per_1m_population: number;
 }
 
 export interface CasesByCountryContainer {

@@ -2,3 +2,5 @@
 .content-wrapper, .main-header, .main-footer {
     margin-left: 0px !important;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

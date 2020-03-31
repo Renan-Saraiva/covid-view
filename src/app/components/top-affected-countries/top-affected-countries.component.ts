@@ -1,7 +1,11 @@
 import { Component, NgZone, OnInit } from '@angular/core';
+import { CoronaMonitorService } from 'src/app/services/corona-monitor.service';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { CasesByCountryContainer } from 'src/app/models/cases-by-country';
+import { ThrowStmt } from '@angular/compiler';
+import { CountriesService } from 'src/app/services/countries.service';
 
 am4core.useTheme(am4themes_animated);
 
@@ -13,59 +17,65 @@ am4core.useTheme(am4themes_animated);
 export class TopAffectedCountriesComponent implements OnInit {
 
   private chart: am4charts.XYChart;
+  private topCases: CasesByCountryContainer;
+  isLoading = true;
 
-  constructor(private zone: NgZone) { }
+  constructor(private zone: NgZone, private monitorService: CoronaMonitorService, private countriesServices: CountriesService) { }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
-    this.createMapComponent();
+    this.loadTopAffectedCountriesData();
   }
 
-  createMapComponent() {
+  loadTopAffectedCountriesData() {
+    this.monitorService.GetCasesAllCountry().subscribe(
+      (topCases) => {
+        this.topCases = {          
+          countries_stat: topCases.countries_stat.sort(
+            (a, b): number => {          
+                            
+              if (Number(a.cases.replace(/,/g,'')) < Number(b.cases.replace(/,/g,''))) {
+                  return 1;
+              }          
+              if (Number(a.cases.replace(/,/g,'')) > Number(b.cases.replace(/,/g,''))) {
+                  return -1;
+              }
+              return 0;
+            }
+          ).slice(0,10)
+        };
+        this.createChartComponent();
+      }
+    )
+  }
+
+  createChartComponent() {
     this.chart = am4core.create("chart-div", am4charts.XYChart);
     this.chart.events.on("ready", () => {
-
+      this.isLoading = false;
     })
     this.zone.runOutsideAngular(() => {
 
-      // Add data
-      this.chart.data = [{
-        "name": "Brasil",
-        "points": 35654,
-        "color": this.chart.colors.next(),
-        "bullet": "https://www.countryflags.io/br/shiny/64.png"
-      }, {
-        "name": "Russia",
-        "points": 65456,
-        "color": this.chart.colors.next(),
-        "bullet": "https://www.countryflags.io/ru/shiny/64.png"
-      }, {
-        "name": "Equador",
-        "points": 45724,
-        "color": this.chart.colors.next(),
-        "bullet": "https://www.countryflags.io/rw/shiny/64.png"
-      }, {
-        "name": "Monaco",
-        "points": 13654,
-        "color": this.chart.colors.next(),
-        "bullet": "https://www.countryflags.io/mc/shiny/64.png"
-      }, {
-        "name": "Canada",
-        "points": 13654,
-        "color": this.chart.colors.next(),
-        "bullet": "https://www.countryflags.io/ca/shiny/64.png"
-      }, {
-        "name": "Belarus",
-        "points": 13654,
-        "color": this.chart.colors.next(),
-        "bullet": "https://www.countryflags.io/by/shiny/64.png"
-      }];
+      let chartData = this.topCases.countries_stat.map((countryStat) => {
+        let country = this.countriesServices.getCountryByInternationalName(countryStat.country_name);
+
+        if (country) {
+          return {
+            "id": country.sigla,
+            "name": country.nome_pais,
+            "cases": countryStat.cases,
+            "flag": `https://www.countryflags.io/${country.sigla.toLowerCase()}/shiny/64.png`
+          };
+        }
+      });
+
+      this.chart.data = chartData;     
 
       // Create axes
       let categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis());
-      categoryAxis.dataFields.category = "name";
+      categoryAxis.dataFields.category = "id";
       categoryAxis.renderer.grid.template.disabled = true;
       categoryAxis.renderer.minGridDistance = 30;
       categoryAxis.renderer.inside = true;
@@ -85,13 +95,13 @@ export class TopAffectedCountriesComponent implements OnInit {
 
       // Create series
       let series = this.chart.series.push(new am4charts.ColumnSeries());
-      series.dataFields.valueY = "points";
-      series.dataFields.categoryX = "name";
-      series.columns.template.propertyFields.fill = "color";
-      series.columns.template.propertyFields.stroke = "color";
+      series.dataFields.valueY = "cases";
+      series.dataFields.categoryX = "id";
       series.columns.template.column.cornerRadiusTopLeft = 15;
       series.columns.template.column.cornerRadiusTopRight = 15;
-      series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/b]";
+      series.columns.template.tooltipText = `{name}
+      Total de casos: [bold]{cases}[/b]`;
+      series.heatRules.push({ target: series.columns.template, property: "fill", dataField: "valueY", min: am4core.color("#faa31d"), max: am4core.color("#e30219") });
 
       // Add bullets
       let bullet = series.bullets.push(new am4charts.Bullet());
@@ -100,9 +110,9 @@ export class TopAffectedCountriesComponent implements OnInit {
       image.verticalCenter = "bottom";
       image.dy = 20;
       image.y = am4core.percent(100);
-      image.propertyFields.href = "bullet";
+      image.propertyFields.href = "flag";
       image.tooltipText = series.columns.template.tooltipText;
-      image.propertyFields.fill = "color";
+      //image.propertyFields.fill = "color";
       image.filters.push(new am4core.DropShadowFilter());
     });
   }

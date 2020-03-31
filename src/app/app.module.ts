@@ -16,6 +16,11 @@ import { registerLocaleData } from '@angular/common';
 import { CountriesService } from './services/countries.service';
 import { WorldViewComponent } from './components/world-view/world-view.component';
 import { TopAffectedCountriesComponent } from './components/top-affected-countries/top-affected-countries.component';
+import { AllCountriesTableComponent } from './components/all-countries-table/all-countries-table.component'
+import { from } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -41,13 +46,17 @@ registerLocaleData(localePt, 'pt');
     HomeComponent,
     CountryComponent,
     WorldViewComponent,
-    TopAffectedCountriesComponent
+    TopAffectedCountriesComponent,
+    AllCountriesTableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     GoogleChartsModule.forRoot(),
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     ConfigService, {
