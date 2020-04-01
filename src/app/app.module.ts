@@ -21,6 +21,7 @@ import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -56,7 +57,8 @@ registerLocaleData(localePt, 'pt');
     GoogleChartsModule.forRoot(),
     BrowserAnimationsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     ConfigService, {

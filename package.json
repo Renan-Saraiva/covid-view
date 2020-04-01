@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "buld-prod": "ng build --base-href \"https://renan-saraiva.github.io/covid-view/\" --build-optimizer=false"
+    "build-prod": "ng build --base-href \"https://renan-saraiva.github.io/covid-view/\" --build-optimizer=false",
+    "send-ghp": "ngh"
   },
   "private": true,
   "dependencies": {
