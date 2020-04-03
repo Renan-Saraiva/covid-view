@@ -5,6 +5,9 @@ import { CountriesService } from 'src/app/services/countries.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatCheckbox } from '@angular/material/checkbox';
+
 
 @Component({
   selector: 'all-countries-table',
@@ -13,7 +16,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class AllCountriesTableComponent implements OnInit {
   
-  displayedColumns: string[] = ['id', 'nome', 'totalCasos', 'totalAtivos', 'totalMortos', 'estadoCritico'];
+  displayedColumns: string[] = ['select', 'id', 'nome', 'totalCasos', 'totalAtivos', 'totalMortos', 'estadoCritico', 'mortalidade'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -23,7 +26,7 @@ export class AllCountriesTableComponent implements OnInit {
   { }
 
   ngOnInit() {
-    this.monitorService.GetCasesAllCountry().subscribe(
+    this.monitorService.GetCasesAllCountry().subscribe(     
       (data) => {
         let dataSource = data.countries_stat.map((countryStat) => {
           let country = this.countriesServices.getCountryByInternationalName(countryStat.country_name);
@@ -32,10 +35,10 @@ export class AllCountriesTableComponent implements OnInit {
               return {
                 "id": country.sigla,
                 "nome": country.nome_pais,
-                "totalCasos": countryStat.cases,
-                "totalAtivos": countryStat.active_cases,
-                "totalMortos": countryStat.deaths,
-                "estadoCritico": countryStat.serious_critical
+                "totalCasos": Number(countryStat.cases.replace(/,/g,'')),
+                "totalAtivos": Number(countryStat.active_cases.replace(/,/g,'')) ,
+                "totalMortos": Number(countryStat.deaths.replace(/,/g,'')),
+                "estadoCritico": Number(countryStat.serious_critical.replace(/,/g,''))
               };
             }
           }).filter((item) => {
@@ -46,7 +49,7 @@ export class AllCountriesTableComponent implements OnInit {
 
         this.paginator.pageSize = 20;
         this.dataSource = new MatTableDataSource(dataSource);      
-        this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator = this.paginator;      
         this.dataSource.sort = this.sort;
       }
     );

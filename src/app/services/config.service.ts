@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 import { Config } from '../models/config';
-import { TouchSequence } from 'selenium-webdriver';
-
 
 @Injectable()
 export class ConfigService {
 
+  private httpClient: HttpClient;
   private configUri = './assets/config/config.json';  
   private config: Config;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private handler: HttpBackend) 
+  {
+    this.httpClient = new HttpClient(handler);
+  }
 
   public loadConfigJSON(): Promise<any> {
     return this.httpClient.get<Config>(this.configUri)

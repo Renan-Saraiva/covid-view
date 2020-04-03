@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 import { Country } from '../models/country';
+import { CasesByCountry } from '../models/cases-by-country';
 
 @Injectable()
 export class CountriesService {
 
+  private httpClient: HttpClient;
   private countries: Country[];
   private countriesUri: string = './assets/data/countries.json'; 
   
-  constructor(private httpClient: HttpClient) {  }
+  constructor(private handler: HttpBackend) 
+  {
+    this.httpClient = new HttpClient(handler);
+  }
 
   public loadCountriesJSON(): Promise<any> {
     return this.httpClient.get<Country[]>(this.countriesUri)

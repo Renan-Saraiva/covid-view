@@ -4,6 +4,15 @@
     </div>
     <div class="card-body p-0">
         <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>                
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox></mat-checkbox>
+                </td>
+            </ng-container>
+            
             <!-- Position Column -->
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef></th>
@@ -19,31 +28,31 @@
             </ng-container>
 
             <!-- Weight Column -->
-            <ng-container matColumnDef="totalCasos">
-                <th mat-header-cell *matHeaderCellDef> Total de Casos </th>
+            <ng-container matColumnDef="totalCasos" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total de Casos </th>
                 <td mat-cell *matCellDef="let element"> {{element.totalCasos}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="totalAtivos">
-                <th mat-header-cell *matHeaderCellDef> Total Ativos </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Ativos </th>
                 <td mat-cell *matCellDef="let element"> {{element.totalAtivos}} </td>
             </ng-container>
 
             <ng-container matColumnDef="totalMortos">
-                <th mat-header-cell *matHeaderCellDef> Total Mortos </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Mortos </th>
                 <td mat-cell *matCellDef="let element"> {{element.totalMortos}} </td>
             </ng-container>
 
             <ng-container matColumnDef="estadoCritico">
-                <th mat-header-cell *matHeaderCellDef> Estado Crítico </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado Crítico </th>
                 <td mat-cell *matCellDef="let element"> {{element.estadoCritico}} </td>
             </ng-container>
 
 
-            <ng-container>
+            <ng-container matColumnDef="mortalidade">
                 <th mat-header-cell *matHeaderCellDef> Mortalidade </th>
-                <td mat-cell *matCellDef="let element"> {{ element.totalCases / element.totalMortos }} </td>
+                <td mat-cell *matCellDef="let element"> {{ (element.totalMortos / element.totalCasos) * 100 | number:'0.2-2' }} % </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

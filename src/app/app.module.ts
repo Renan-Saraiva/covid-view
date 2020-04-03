@@ -3,7 +3,7 @@ import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { ConfigService } from './services/config.service';
 import { AppHeaderComponent } from './layout/app-header/app-header.component';
 import { AppFooterComponent } from './layout/app-footer/app-footer.component';
@@ -17,11 +17,13 @@ import { CountriesService } from './services/countries.service';
 import { WorldViewComponent } from './components/world-view/world-view.component';
 import { TopAffectedCountriesComponent } from './components/top-affected-countries/top-affected-countries.component';
 import { AllCountriesTableComponent } from './components/all-countries-table/all-countries-table.component'
-import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { RapidApiInterceptor } from './interceptors/rapid-api.interceptor';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -34,7 +36,6 @@ const appCountries = (countriesServices: CountriesService) => {
     return countriesServices.loadCountriesJSON();
   }
 }
-
 
 registerLocaleData(localePt, 'pt');
 
@@ -58,22 +59,24 @@ registerLocaleData(localePt, 'pt');
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatCheckboxModule
   ],
   providers: [
     ConfigService, {
       provide: APP_INITIALIZER,
-      useFactory: appConfig, 
+      useFactory: appConfig,
       multi: true,
       deps: [ConfigService]
     },
     CountriesService, {
       provide: APP_INITIALIZER,
-      useFactory: appCountries, 
+      useFactory: appCountries,
       multi: true,
       deps: [CountriesService]
     },
     { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: HTTP_INTERCEPTORS, useClass: RapidApiInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
