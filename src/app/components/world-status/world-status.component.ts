@@ -28,7 +28,14 @@ export class WorldStatusComponent implements OnInit {
   loadWorldTotalState() {
     this.monitorService.GetWorldTotalState().subscribe(
       (worldStatus) => {
-        this.worldStatus = worldStatus;
+        this.worldStatus = {
+          total_cases: Number(worldStatus.total_cases.replace(/,/g,'')),
+          total_deaths: Number(worldStatus.total_deaths.replace(/,/g,'')),
+          total_recovered: Number(worldStatus.total_recovered.replace(/,/g,'')),
+          new_cases: Number(worldStatus.new_cases.replace(/,/g,'')),
+          new_deaths: Number(worldStatus.new_deaths.replace(/,/g,''))
+        };
+                
         this.isLoading = false;
       }
     );

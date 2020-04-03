@@ -30,23 +30,23 @@
             <!-- Weight Column -->
             <ng-container matColumnDef="totalCasos" >
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total de Casos </th>
-                <td mat-cell *matCellDef="let element"> {{element.totalCasos}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.totalCasos | number:'0.0-0'}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="totalAtivos">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Ativos </th>
-                <td mat-cell *matCellDef="let element"> {{element.totalAtivos}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.totalAtivos | number:'0.0-0'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="totalMortos">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Mortos </th>
-                <td mat-cell *matCellDef="let element"> {{element.totalMortos}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.totalMortos | number:'0.0-0'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="estadoCritico">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado Crítico </th>
-                <td mat-cell *matCellDef="let element"> {{element.estadoCritico}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.estadoCritico | number:'0.0-0'}} </td>
             </ng-container>
 
 

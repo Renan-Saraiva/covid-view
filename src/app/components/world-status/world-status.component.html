@@ -5,7 +5,7 @@
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             </div>
             <div class="inner">
-                <h3>{{ worldStatus.new_cases }}</h3>
+                <h3>{{ worldStatus.new_cases | number:'0.0-0' }}</h3>
                 <p>Novos casos</p>
             </div>
             <div class="icon">
@@ -19,7 +19,7 @@
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             </div>
             <div class="inner">
-                <h3>{{ worldStatus.total_cases }}</h3>
+                <h3>{{ worldStatus.total_cases | number:'0.0-0' }}</h3>
                 <p>Total de infectados</p>
             </div>
             <div class="icon">
@@ -33,7 +33,7 @@
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             </div>
             <div class="inner">
-                <h3>{{ worldStatus.total_recovered }}</h3>
+                <h3>{{ worldStatus.total_recovered | number:'0.0-0'}}</h3>
                 <p>Recuperados</p>
             </div>
             <div class="icon">
@@ -47,7 +47,7 @@
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             </div>
             <div class="inner">
-                <h3>{{ worldStatus.total_deaths }} </h3>
+                <h3>{{ worldStatus.total_deaths | number:'0.0-0'}} </h3>
                 <p>Total de mortes</p>
             </div>
             <div class="icon">
