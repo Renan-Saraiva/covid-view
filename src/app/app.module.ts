@@ -55,7 +55,7 @@ registerLocaleData(localePt, 'pt');
     TopAffectedCountriesComponent,
     AllCountriesTableComponent,
     CountryStatusComponent,
-    CountryInputComponent,
+    CountryInputComponent
   ],
   imports: [
     BrowserModule,

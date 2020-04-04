@@ -5,7 +5,7 @@
     </li>
   </ul>
 
-  <app-country-input></app-country-input>
+  <app-country-input (selectedValue)="routeTo($event)"></app-country-input>
 
   <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">

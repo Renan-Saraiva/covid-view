@@ -26,18 +26,6 @@ export class CountriesService {
 
     name = name.toLocaleLowerCase();
 
-    if (name == "usa")
-      name = "united states";
-
-    if (name == "uk")
-      name = "united kingdom";
-
-    if (name == "car")
-      name = "central african republic";
-
-    if (name == "drc")
-      name = "Congo (drc)";
-
     return this.countries.find(item => item.nome_pais_int.toLowerCase() == name);
   }
 

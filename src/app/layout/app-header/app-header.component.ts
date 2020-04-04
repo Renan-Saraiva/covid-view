@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Country } from 'src/app/models/country';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
 })
 export class AppHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  routeTo(country: Country) {
+    this.router.navigate(['country', country.nome_pais_int])
   }
 
 }
