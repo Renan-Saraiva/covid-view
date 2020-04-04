@@ -345,7 +345,7 @@
   },
   { "gentilico" : "norte-americana",
     "nome_pais" : "Estados Unidos",
-    "nome_pais_int" : "United States",
+    "nome_pais_int" : "USA",
     "sigla" : "US"
   },
   { "gentilico" : "estoniana",
@@ -405,7 +405,7 @@
   },
   { "gentilico" : "inglesa",
     "nome_pais" : "Grã-Bretanha",
-    "nome_pais_int" : "United Kingdom",
+    "nome_pais_int" : "uk",
     "sigla" : "GB"
   },
   { "gentilico" : "granadina",
@@ -985,12 +985,12 @@
   },
   { "gentilico" : "centro-africana",
     "nome_pais" : "República Centro-Africana",
-    "nome_pais_int" : "Central African Republic",
+    "nome_pais_int" : "car",
     "sigla" : "CF"
   },
   { "gentilico" : "congolesa",
     "nome_pais" : "República Democrática do Congo",
-    "nome_pais_int" : "Congo (DRC)",
+    "nome_pais_int" : "drc",
     "sigla" : "CD"
   },
   { "gentilico" : "dominicana",

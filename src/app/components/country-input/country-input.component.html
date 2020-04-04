@@ -1,0 +1,18 @@
+<form class="form-inline ml-3">
+    <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" style="color: #FFF;" placeholder="Procure por um país" [matAutocomplete]="auto"
+            [(ngModel)]="searchInputValue" [ngModelOptions]="{standalone: true}" (keypress)="keyPressHAndler($event)">
+        <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit" (click)="selectValue()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options" [value]="option.nome_pais" (onSelectionChange)="optionSelected(option.nome_pais)">
+        <img aria-hidden [src]="'https://www.countryflags.io/' + option.sigla + '/shiny/64.png'" height="20">
+        <span class="pl-2">{{option.nome_pais}}</span>
+    </mat-option>
+</mat-autocomplete>
