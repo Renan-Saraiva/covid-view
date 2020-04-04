@@ -1,0 +1,14 @@
+<mat-form-field class="filter">
+    <input
+        matInput 
+        type="text" 
+        placeholder="Busca"
+        [matAutocomplete]="auto"
+        [(ngModel)]="searchInputValue">
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option.nome_pais">
+            <img aria-hidden [src]="'https://www.countryflags.io/' + option.sigla + '/shiny/64.png'" height="20">
+            <span class="pl-2">{{option.nome_pais}}</span>
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
