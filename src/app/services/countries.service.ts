@@ -25,19 +25,20 @@ export class CountriesService {
   
   public getCountryByInternationalName(name: string) : Country {
 
-    if (name == "USA")
-      name = "United States";
-
-    if (name == "UK")
-      name = "United Kingdom";
-
-    if (name == "CAR")
-      name = "Central African Republic";
-
-    if (name == "DRC")
-      name = "Congo (DRC)";
-
     name = name.toLocaleLowerCase();
+
+    if (name == "usa")
+      name = "united states";
+
+    if (name == "uk")
+      name = "united kingdom";
+
+    if (name == "car")
+      name = "central african republic";
+
+    if (name == "drc")
+      name = "Congo (drc)";
+    
     return this.countries.find(item => item.nome_pais_int.toLowerCase() == name);
   }
 

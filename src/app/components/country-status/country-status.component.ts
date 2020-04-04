@@ -23,14 +23,12 @@ export class CountryStatusComponent implements OnInit {
 
   isLoading = true;
 
-  constructor(private monitorService: CoronaMonitorService, private countryService: CountriesService) { 
-
-    
-  }
+  constructor(private monitorService: CoronaMonitorService, private countryService: CountriesService) { }
 
   ngOnInit(): void {
-
+    console.log(this.country);
     let country = this.countryService.getCountryByInternationalName(this.country);
+    console.log(country);
     if (country)
       this.countryInfo = country;
 

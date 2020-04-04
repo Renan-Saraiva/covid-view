@@ -32,10 +32,9 @@ export class TopAffectedCountriesComponent implements OnInit {
   loadTopAffectedCountriesData() {
     this.monitorService.GetCasesAllCountry().subscribe(
       (topCases) => {
-        this.topCases = {          
+        this.topCases = {
           countries_stat: topCases.countries_stat.sort(
-            (a, b): number => {          
-                            
+            (a, b): number => {
               if (Number(a.cases.replace(/,/g,'')) < Number(b.cases.replace(/,/g,''))) {
                   return 1;
               }          
@@ -60,7 +59,6 @@ export class TopAffectedCountriesComponent implements OnInit {
 
       let chartData = this.topCases.countries_stat.map((countryStat) => {
         let country = this.countriesServices.getCountryByInternationalName(countryStat.country_name);
-
         if (country) {
           return {
             "id": country.sigla,
