@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { RapidAPI } from '../models/config';
 import { WorldTotalState } from '../models/world-total-state';
-import { StateByCountryCollection } from '../models/state-by-country';
+import { StateByCountryContainer } from '../models/state-by-country';
 import { CasesByCountryContainer, CasesByCountry } from '../models/cases-by-country';
 
 @Injectable({
@@ -21,10 +21,10 @@ export class CoronaMonitorService {
     return this.httpClient.get<WorldTotalState>(this.apiConfig.url + '/worldstat.php');
   }
 
-  public GetStateByCountry(country: string) {
+  public GetLastestStateByCountry(country: string) {
     const params = new HttpParams().set("country", country);
 
-    return this.httpClient.get<StateByCountryCollection>(
+    return this.httpClient.get<StateByCountryContainer>(
       this.apiConfig.url + '/latest_stat_by_country.php', { params }
     );
   }

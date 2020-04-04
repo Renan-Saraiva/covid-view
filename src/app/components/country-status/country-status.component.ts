@@ -1,0 +1,55 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { CoronaMonitorService } from 'src/app/services/corona-monitor.service';
+import { StateByCountry } from 'src/app/models/state-by-country';
+import { CountriesService } from 'src/app/services/countries.service';
+import { Country } from 'src/app/models/country';
+
+@Component({
+  selector: 'country-status',
+  templateUrl: './country-status.component.html',
+  styleUrls: ['./country-status.component.css']
+})
+export class CountryStatusComponent implements OnInit {
+
+  @Input() country: string;
+  countryStatus = {
+    total_cases: 0,
+    total_deaths: 0,
+    total_recovered: 0,
+    serious_critical: 0,
+    update_on: new Date()
+  };
+  countryInfo: Country  = new Country(); 
+
+  isLoading = true;
+
+  constructor(private monitorService: CoronaMonitorService, private countryService: CountriesService) { 
+
+    
+  }
+
+  ngOnInit(): void {
+
+    let country = this.countryService.getCountryByInternationalName(this.country);
+    if (country)
+      this.countryInfo = country;
+
+    this.monitorService.GetLastestStateByCountry(this.country).subscribe(
+      (countryStatuscontainer) => {
+        if (countryStatuscontainer.latest_stat_by_country && countryStatuscontainer.latest_stat_by_country.length > 0) {
+          
+          let countryData = countryStatuscontainer.latest_stat_by_country[0];
+          this.countryStatus = {
+            total_cases: Number(countryData.total_cases.replace(/,/g,'')),
+            total_deaths: Number(countryData.total_deaths.replace(/,/g,'')),
+            total_recovered: Number(countryData.total_recovered.replace(/,/g,'')),
+            serious_critical: Number(countryData.serious_critical.replace(/,/g,'')),
+            update_on: countryData.record_date
+          };        
+        }
+        this.isLoading = false;
+      }
+    )
+  }
+
+}

@@ -1,0 +1,40 @@
+<div class="card card-widget">
+    <div class="overlay dark" *ngIf="isLoading">
+        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+    </div>
+    <div class="card-header">
+        <div class="user-block">
+            <img src="https://www.countryflags.io/{{countryInfo.sigla}}/shiny/64.png" alt="{{countryInfo.nome_pais}}">
+            <span class="username"><a>{{countryInfo.nome_pais}}</a></span>
+            <span class="description">Ultima atualização -  {{ countryStatus.update_on | date:'shortTime' }} - Hoje</span>
+        </div>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                    class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link">
+                    Infectados <span class="float-right badge bg-primary">{{ countryStatus.total_cases | number:'0.0-0' }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    Recuperados <span class="float-right badge bg-success">{{ countryStatus.total_recovered | number:'0.0-0' }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    Estádo Critico <span class="float-right badge bg-warning">{{ countryStatus.serious_critical | number:'0.0-0' }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    Mortes <span class="float-right badge bg-danger">{{ countryStatus.total_deaths | number:'0.0-0' }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

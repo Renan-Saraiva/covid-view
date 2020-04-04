@@ -23,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { RapidApiInterceptor } from './interceptors/rapid-api.interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CountryStatusComponent } from './components/country-status/country-status.component';
 
 
 const appConfig = (configService: ConfigService) => {
@@ -49,7 +50,8 @@ registerLocaleData(localePt, 'pt');
     CountryComponent,
     WorldViewComponent,
     TopAffectedCountriesComponent,
-    AllCountriesTableComponent
+    AllCountriesTableComponent,
+    CountryStatusComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
 })
 export class AllCountriesTableComponent implements OnInit {
   
-  displayedColumns: string[] = ['select', 'id', 'nome', 'totalCasos', 'totalAtivos', 'totalMortos', 'estadoCritico', 'mortalidade'];
+  displayedColumns: string[] = ['id', 'nome', 'totalCasos', 'totalAtivos', 'totalMortos', 'estadoCritico', 'mortalidade'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -38,7 +38,8 @@ export class AllCountriesTableComponent implements OnInit {
                 "totalCasos": Number(countryStat.cases.replace(/,/g,'')),
                 "totalAtivos": Number(countryStat.active_cases.replace(/,/g,'')) ,
                 "totalMortos": Number(countryStat.deaths.replace(/,/g,'')),
-                "estadoCritico": Number(countryStat.serious_critical.replace(/,/g,''))
+                "estadoCritico": Number(countryStat.serious_critical.replace(/,/g,'')),
+                "country": countryStat.country_name
               };
             }
           }).filter((item) => {
