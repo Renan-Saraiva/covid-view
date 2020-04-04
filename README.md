@@ -1,27 +1,15 @@
 # CovidView
+Dashboard para visualização dos dados da pandemia de corona virus pelo mundo.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+Clique [aqui](https://renan-saraiva.github.io/covid-view/home) para acessar a aplicação.
 
-## Development server
+## Contribuições
+Incentivamos contribuições. Fique a vontade de sugerir qualquer contribuição ou de fazer evoluções e contribuir com pull requests.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## TODO
+- Criação da página de visualização de dados por países.
+- Criação da busca com autocomplete dos paises na página inicial.
+- Criação do gráfico com a evolução dos infectados por países. 
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).  
+## Fonte de dados
+[coronavirus-monitor] (https://rapidapi.com/astsiatsko/api/coronavirus-monitor)
