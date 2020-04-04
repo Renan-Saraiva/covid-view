@@ -21,11 +21,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - name: Build and Deploy
+    - name: Build
+      run: |
+         npm install -g @angular/cli
+         npm install
+         ng build --prod --base-href "https://renan-saraiva.github.io/covid-view/" --build-optimizer=false
+    - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BASE_BRANCH: master
         BRANCH: gh-pages
         FOLDER: dist
-        BUILD_SCRIPT: npm install && ng build --prod --base-href "https://renan-saraiva.github.io/covid-view/" --build-optimizer=false
