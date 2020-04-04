@@ -25,7 +25,6 @@ import { RapidApiInterceptor } from './interceptors/rapid-api.interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CountryStatusComponent } from './components/country-status/country-status.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
 import { CountryInputComponent } from './components/country-input/country-input.component';
 import { FormsModule } from '@angular/forms';
 
@@ -68,7 +67,6 @@ registerLocaleData(localePt, 'pt');
     MatSortModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatInputModule,
     FormsModule
   ],
   providers: [
