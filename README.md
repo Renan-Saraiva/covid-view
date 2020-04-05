@@ -1,7 +1,7 @@
 # CovidView
 Dashboard para visualização dos dados da pandemia de corona virus pelo mundo.
 
-Clique [aqui](https://renan-saraiva.github.io/covid-view/home) para acessar a aplicação.
+Clique [aqui](https://renan-saraiva.github.io/covid-view) para acessar a aplicação.
 
 ## Contribuições
 Incentivamos contribuições. Fique a vontade de sugerir qualquer contribuição ou de fazer evoluções e contribuir com pull requests.
