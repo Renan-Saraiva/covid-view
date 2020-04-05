@@ -26,7 +26,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CountryStatusComponent } from './components/country-status/country-status.component';
 import { CountryPieChartComponent } from './components/country-pie-chart/country-pie-chart.component';
 import { CountryTodayChangesComponent } from './components/country-today-changes/country-today-changes.component';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { CountryInputComponent } from './components/country-input/country-input.component';
+import { FormsModule } from '@angular/forms';
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -55,7 +57,8 @@ registerLocaleData(localePt, 'pt');
     AllCountriesTableComponent,
     CountryStatusComponent,
     CountryPieChartComponent,
-    CountryTodayChangesComponent
+    CountryTodayChangesComponent,
+    CountryInputComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,9 @@ registerLocaleData(localePt, 'pt');
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    FormsModule
   ],
   providers: [
     ConfigService, {
