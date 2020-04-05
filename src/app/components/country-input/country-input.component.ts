@@ -37,7 +37,6 @@ export class CountryInputComponent implements OnInit {
 
   optionSelected(country: string) {
     this.inputValue = country;
-    this.selectValue();
   }
 
   set searchInputValue(event: string) {
