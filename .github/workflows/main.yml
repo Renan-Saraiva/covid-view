@@ -27,7 +27,7 @@ jobs:
       run: |
          npm install -g @angular/cli
          npm install
-         ng build --prod --base-href "https://renan-saraiva.github.io/covid-view/" --build-optimizer=false
+         ng build --prod --base-href "/covid-view/" --build-optimizer=false
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
