@@ -1,0 +1,42 @@
+<div class="card card-primary card-outline">
+    <div class="overlay dark" *ngIf="isLoading">
+        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+    </div>
+    <div class="card-header">
+        <h3 class="card-title">Hoje</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="info-news-cases" class="info-box bg-primary">
+            <span class="info-box-icon">
+                <i class="fas fa-briefcase-medical fa-2x"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-number">{{ countryStatus.new_cases | number:'0.0-0' }} <span>novos casos</span></span>
+                <div class="progress">
+                    <div class="progress-bar" [style.width]="((countryStatus.new_cases / countryStatus.total_cases) * 100) + '%'"></div>
+                </div>
+                <span class="progress-description">
+                    Acrescimo de {{ (countryStatus.new_cases / countryStatus.total_cases) * 100 | number:'0.0-2' }}%
+                </span>
+            </div>
+        </div>
+        <div id="info-news-death" class="info-box bg-danger">
+            <span class="info-box-icon">
+                <i class="fas fa-skull-crossbones fa-2x"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-number">{{ countryStatus.new_deaths | number:'0.0-0' }} <span>novas mortes</span> </span>
+                <div class="progress">
+                    <div class="progress-bar" [style.width]="((countryStatus.new_deaths / countryStatus.total_deaths) * 100) + '%'"></div>
+                </div>
+                <span class="progress-description">
+                    Acrescimo de {{ (countryStatus.new_deaths / countryStatus.total_deaths * 100 )| number:'0.0-2' }}%
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

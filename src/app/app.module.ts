@@ -24,6 +24,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { RapidApiInterceptor } from './interceptors/rapid-api.interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CountryStatusComponent } from './components/country-status/country-status.component';
+import { CountryPieChartComponent } from './components/country-pie-chart/country-pie-chart.component';
+import { CountryTodayChangesComponent } from './components/country-today-changes/country-today-changes.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CountryInputComponent } from './components/country-input/country-input.component';
 import { FormsModule } from '@angular/forms';
@@ -54,6 +56,8 @@ registerLocaleData(localePt, 'pt');
     TopAffectedCountriesComponent,
     AllCountriesTableComponent,
     CountryStatusComponent,
+    CountryPieChartComponent,
+    CountryTodayChangesComponent,
     CountryInputComponent
   ],
   imports: [

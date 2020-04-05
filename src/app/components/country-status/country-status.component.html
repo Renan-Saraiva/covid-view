@@ -4,7 +4,7 @@
     </div>
     <div class="card-header">
         <div class="user-block">
-            <img src="https://www.countryflags.io/{{countryInfo.sigla}}/shiny/64.png" alt="{{countryInfo.nome_pais}}">
+            <img class="rounded" src="https://www.countryflags.io/{{countryInfo.sigla}}/shiny/64.png" alt="{{countryInfo.nome_pais}}">
             <span class="username"><a>{{countryInfo.nome_pais}}</a></span>
             <span class="description">Ultima atualização -  {{ countryStatus.update_on | date:'shortTime' }} - Hoje</span>
         </div>
@@ -22,12 +22,17 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link">
+                    Ativos <span class="float-right badge bg-info">{{ countryStatus.active_cases | number:'0.0-0' }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
                     Recuperados <span class="float-right badge bg-success">{{ countryStatus.total_recovered | number:'0.0-0' }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Estádo Critico <span class="float-right badge bg-warning">{{ countryStatus.serious_critical | number:'0.0-0' }}</span>
+                    Estado critico <span class="float-right badge bg-warning">{{ countryStatus.serious_critical | number:'0.0-0' }}</span>
                 </a>
             </li>
             <li class="nav-item">
