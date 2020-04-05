@@ -10,23 +10,13 @@ export class CountryComponent implements OnInit {
 
   country: string = "";
 
-  constructor(private activatedRoute: ActivatedRoute) 
-  {
-    this.activatedRoute.params.subscribe(
-      params => {
-        console.log(params["country"]);
-        this.country = params["country"]
-      }
-    )
-  }
+  constructor(private activatedRoute: ActivatedRoute) {  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       params => {
-        console.log(params["country"]);
         this.country = params["country"]
       }
     )
   }
-
 }

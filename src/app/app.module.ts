@@ -24,6 +24,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { RapidApiInterceptor } from './interceptors/rapid-api.interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CountryStatusComponent } from './components/country-status/country-status.component';
+import { CountryPieChartComponent } from './components/country-pie-chart/country-pie-chart.component';
+import { CountryTodayChangesComponent } from './components/country-today-changes/country-today-changes.component';
 
 
 const appConfig = (configService: ConfigService) => {
@@ -51,7 +53,9 @@ registerLocaleData(localePt, 'pt');
     WorldViewComponent,
     TopAffectedCountriesComponent,
     AllCountriesTableComponent,
-    CountryStatusComponent
+    CountryStatusComponent,
+    CountryPieChartComponent,
+    CountryTodayChangesComponent
   ],
   imports: [
     BrowserModule,

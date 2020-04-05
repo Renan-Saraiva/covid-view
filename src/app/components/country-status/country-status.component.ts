@@ -12,23 +12,21 @@ import { Country } from 'src/app/models/country';
 export class CountryStatusComponent implements OnInit {
 
   @Input() country: string;
+  countryInfo: Country  = new Country(); 
+  isLoading = true;
   countryStatus = {
     total_cases: 0,
     total_deaths: 0,
     total_recovered: 0,
     serious_critical: 0,
+    active_cases: 0,
     update_on: new Date()
   };
-  countryInfo: Country  = new Country(); 
-
-  isLoading = true;
 
   constructor(private monitorService: CoronaMonitorService, private countryService: CountriesService) { }
 
   ngOnInit(): void {
-    console.log(this.country);
     let country = this.countryService.getCountryByInternationalName(this.country);
-    console.log(country);
     if (country)
       this.countryInfo = country;
 
@@ -36,12 +34,13 @@ export class CountryStatusComponent implements OnInit {
       (countryStatuscontainer) => {
         if (countryStatuscontainer.latest_stat_by_country && countryStatuscontainer.latest_stat_by_country.length > 0) {
           
-          let countryData = countryStatuscontainer.latest_stat_by_country[0];
+          let countryData = countryStatuscontainer.latest_stat_by_country[0];          
           this.countryStatus = {
             total_cases: Number(countryData.total_cases.replace(/,/g,'')),
             total_deaths: Number(countryData.total_deaths.replace(/,/g,'')),
             total_recovered: Number(countryData.total_recovered.replace(/,/g,'')),
             serious_critical: Number(countryData.serious_critical.replace(/,/g,'')),
+            active_cases: Number(countryData.active_cases.replace(/,/g,'')),
             update_on: countryData.record_date
           };        
         }

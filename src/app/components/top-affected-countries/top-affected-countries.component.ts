@@ -4,7 +4,6 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { CasesByCountryContainer } from 'src/app/models/cases-by-country';
-import { ThrowStmt } from '@angular/compiler';
 import { CountriesService } from 'src/app/services/countries.service';
 
 am4core.useTheme(am4themes_animated);
