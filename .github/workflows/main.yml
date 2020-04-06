@@ -6,7 +6,9 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    # branches: [ master ]
+    branches-ignore:
+      - '**'
       
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,7 +27,7 @@ jobs:
       run: |
          npm install -g @angular/cli
          npm install
-         ng build --prod --base-href "https://renan-saraiva.github.io/covid-view/" --build-optimizer=false
+         ng build --prod --base-href "/covid-view/" --build-optimizer=false
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
