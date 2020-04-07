@@ -11,7 +11,7 @@
 </form>
 
 <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of options" [value]="option.nome_pais" (onSelectionChange)="optionSelected(option.nome_pais)">
+    <mat-option *ngFor="let option of options" [value]="option.nome_pais" (onSelectionChange)="optionSelected($event, option.nome_pais)">
         <img aria-hidden [src]="'https://www.countryflags.io/' + option.sigla + '/shiny/64.png'" height="20">
         <span class="pl-2">{{option.nome_pais}}</span>
     </mat-option>

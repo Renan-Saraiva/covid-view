@@ -203,11 +203,6 @@
     "nome_pais_int" : "Kazakhstan",
     "sigla" : "KZ"
   },
-  { "gentilico" : "de ceuta e melilla",
-    "nome_pais" : "Ceuta e Melilla",
-    "nome_pais_int" : "Ceuta & Melilla",
-    "sigla" : "EA"
-  },
   { "gentilico" : "chadiana",
     "nome_pais" : "Chade",
     "nome_pais_int" : "Chad",
@@ -282,11 +277,6 @@
     "nome_pais" : "Curaçao",
     "nome_pais_int" : "Curaçao",
     "sigla" : "CW"
-  },
-  { "gentilico" : "chagositano",
-    "nome_pais" : "Diego Garcia",
-    "nome_pais_int" : "Diego Garcia",
-    "sigla" : "DG"
   },
   { "gentilico" : "dinamarquesa",
     "nome_pais" : "Dinamarca",
@@ -502,16 +492,6 @@
     "nome_pais" : "Ilha Bouvet",
     "nome_pais_int" : "Bouvet Island",
     "sigla" : "BV"
-  },
-  { "gentilico" : "da ilha de ascensão",
-    "nome_pais" : "Ilha de Ascensão",
-    "nome_pais_int" : "Ascension Island",
-    "sigla" : "AC"
-  },
-  { "gentilico" : "da ilha de clipperton",
-    "nome_pais" : "Ilha de Clipperton",
-    "nome_pais_int" : "Clipperton Island",
-    "sigla" : "CP"
   },
   { "gentilico" : "manês",
     "nome_pais" : "Ilha de Man",
@@ -1197,11 +1177,6 @@
     "nome_pais" : "Trinidad e Tobago",
     "nome_pais_int" : "Trinidad & Tobago",
     "sigla" : "TT"
-  },
-  { "gentilico" : "tristanita",
-    "nome_pais" : "Tristão da Cunha",
-    "nome_pais_int" : "Tristan da Cunha",
-    "sigla" : "TA"
   },
   { "gentilico" : "tunisiana",
     "nome_pais" : "Tunísia",

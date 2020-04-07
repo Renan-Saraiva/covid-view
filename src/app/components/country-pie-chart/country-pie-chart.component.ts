@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, Input } from '@angular/core';
+import { Component, OnInit, NgZone, Input, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -12,7 +12,7 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './country-pie-chart.component.html',
   styleUrls: ['./country-pie-chart.component.css']
 })
-export class CountryPieChartComponent implements OnInit {
+export class CountryPieChartComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() country: string;
   chart: am4charts.PieChart;
@@ -23,11 +23,16 @@ export class CountryPieChartComponent implements OnInit {
     active_cases: 0
   };
 
-  isLoading = true;
+  isLoading: boolean;
 
   constructor(private zone: NgZone, private monitorService: CoronaMonitorService) { }
 
   ngOnInit(): void {
+    this.loadCountryStatus();
+  }
+
+  loadCountryStatus(){
+    this.isLoading = true;
     this.monitorService.GetLastestStateByCountry(this.country).subscribe(
       (countryStatuscontainer) => {
         if (countryStatuscontainer.latest_stat_by_country && countryStatuscontainer.latest_stat_by_country.length > 0) {        
@@ -89,6 +94,24 @@ export class CountryPieChartComponent implements OnInit {
       series.hiddenState.properties.endAngle = 90;
       this.chart.legend = new am4charts.Legend();
       this.chart.legend.position = "left";
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.country && !changes.country.firstChange) {
+      this.disposechart();
+      this.loadCountryStatus();
+    }
+  }
+
+  disposechart() {
+    if (this.chart)
+      this.chart.dispose();
+  }
+
+  ngOnDestroy() {
+    this.zone.runOutsideAngular(() => {
+      this.disposechart();
     });
   }
 }

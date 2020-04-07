@@ -29,6 +29,7 @@ import { CountryTodayChangesComponent } from './components/country-today-changes
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CountryInputComponent } from './components/country-input/country-input.component';
 import { FormsModule } from '@angular/forms';
+import { WorldComponent } from './pages/world/world.component';
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -58,7 +59,8 @@ registerLocaleData(localePt, 'pt');
     CountryStatusComponent,
     CountryPieChartComponent,
     CountryTodayChangesComponent,
-    CountryInputComponent
+    CountryInputComponent,
+    WorldComponent
   ],
   imports: [
     BrowserModule,

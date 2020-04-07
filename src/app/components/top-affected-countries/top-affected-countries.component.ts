@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { CoronaMonitorService } from 'src/app/services/corona-monitor.service';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
@@ -13,7 +13,7 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './top-affected-countries.component.html',
   styleUrls: ['./top-affected-countries.component.css']
 })
-export class TopAffectedCountriesComponent implements OnInit {
+export class TopAffectedCountriesComponent implements OnInit, OnDestroy {
 
   private chart: am4charts.XYChart;
   private topCases: CasesByCountryContainer;
@@ -111,6 +111,14 @@ export class TopAffectedCountriesComponent implements OnInit {
       image.tooltipText = series.columns.template.tooltipText;
       //image.propertyFields.fill = "color";
       image.filters.push(new am4core.DropShadowFilter());
+    });
+  }
+
+  ngOnDestroy() {
+    this.zone.runOutsideAngular(() => {
+      if (this.chart) {
+        this.chart.dispose();
+      }     
     });
   }
 

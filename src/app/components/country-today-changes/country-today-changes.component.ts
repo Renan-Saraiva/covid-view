@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CoronaMonitorService } from 'src/app/services/corona-monitor.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { CoronaMonitorService } from 'src/app/services/corona-monitor.service';
   templateUrl: './country-today-changes.component.html',
   styleUrls: ['./country-today-changes.component.css']
 })
-export class CountryTodayChangesComponent implements OnInit {
+export class CountryTodayChangesComponent implements OnInit, OnChanges {
 
   @Input() country: string;
   countryStatus = {
@@ -16,11 +16,16 @@ export class CountryTodayChangesComponent implements OnInit {
     new_deaths: 0
   };
 
-  isLoading = true;
+  isLoading: boolean;
 
   constructor(private monitorService: CoronaMonitorService) { }
 
   ngOnInit(): void {
+    this.loadCountryStatus();
+  }
+
+  loadCountryStatus() {
+    this.isLoading = true;
     this.monitorService.GetLastestStateByCountry(this.country).subscribe(
       (countryStatuscontainer) => {
         if (countryStatuscontainer.latest_stat_by_country && countryStatuscontainer.latest_stat_by_country.length > 0) {        
@@ -38,5 +43,11 @@ export class CountryTodayChangesComponent implements OnInit {
         this.isLoading = false;
       }
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.country && !changes.country.firstChange) {
+      this.loadCountryStatus();
+    }
   }
 }

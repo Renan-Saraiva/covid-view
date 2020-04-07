@@ -1,4 +1,4 @@
-import { Component, NgZone , OnInit } from '@angular/core';
+import { Component, NgZone , OnInit, OnDestroy } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
@@ -15,7 +15,7 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './world-view.component.html',
   styleUrls: ['./world-view.component.css']
 })
-export class WorldViewComponent implements OnInit {
+export class WorldViewComponent implements OnInit, OnDestroy {
 
   private chart: am4maps.MapChart;
   private cases: CasesByCountryContainer;
@@ -110,7 +110,6 @@ export class WorldViewComponent implements OnInit {
   ngAfterViewInit() {
     this.loadCountriesData();
   }
-
   
   ngOnDestroy() {
     this.zone.runOutsideAngular(() => {
