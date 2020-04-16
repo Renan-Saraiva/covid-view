@@ -37,18 +37,9 @@ export class CountryStatusComponent implements OnInit, OnChanges {
       this.countryInfo = country;
 
     this.monitorService.GetLastestStateByCountry(this.country).subscribe(
-      (countryStatuscontainer) => {
-        if (countryStatuscontainer.latest_stat_by_country && countryStatuscontainer.latest_stat_by_country.length > 0) {
-
-          let countryData = countryStatuscontainer.latest_stat_by_country[0];
-          this.countryStatus = {
-            total_cases: Number(countryData.total_cases.replace(/,/g, '')),
-            total_deaths: Number(countryData.total_deaths.replace(/,/g, '')),
-            total_recovered: Number(countryData.total_recovered.replace(/,/g, '')),
-            serious_critical: Number(countryData.serious_critical.replace(/,/g, '')),
-            active_cases: Number(countryData.active_cases.replace(/,/g, '')),
-            update_on: countryData.record_date
-          };
+      (countryStatus) => {
+        if (countryStatus) {          
+          this.countryStatus = countryStatus;
         }
         this.isLoading = false;
       }

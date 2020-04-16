@@ -27,19 +27,10 @@ export class CountryTodayChangesComponent implements OnInit, OnChanges {
   loadCountryStatus() {
     this.isLoading = true;
     this.monitorService.GetLastestStateByCountry(this.country).subscribe(
-      (countryStatuscontainer) => {
-        if (countryStatuscontainer.latest_stat_by_country && countryStatuscontainer.latest_stat_by_country.length > 0) {        
-          let countryData = countryStatuscontainer.latest_stat_by_country[0];    
+      (countryData) => {
+        if (countryData)           
+          this.countryStatus = countryData;
           
-          countryData.new_deaths
-          
-          this.countryStatus = {
-            total_cases: Number(countryData.total_cases.replace(/,/g,'')),
-            total_deaths: Number(countryData.total_deaths.replace(/,/g,'')),
-            new_cases: Number(countryData.new_cases.replace(/,/g,'')),
-            new_deaths: Number(countryData.new_deaths.replace(/,/g,''))            
-          };
-        }
         this.isLoading = false;
       }
     );

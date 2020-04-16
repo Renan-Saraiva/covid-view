@@ -42,7 +42,7 @@ export class TopAffectedCountriesComponent implements OnInit, OnDestroy {
               }
               return 0;
             }
-          ).slice(0,10)
+          ).slice(0,7)
         };
         this.createChartComponent();
       }
