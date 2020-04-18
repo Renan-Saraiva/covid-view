@@ -17,3 +17,8 @@ export interface StateByCountryContainer {
     country: string;
     latest_stat_by_country: StateByCountry[];
 }
+
+export interface StateByCountryHistoryContainer {
+    country: string;
+    stat_by_country: StateByCountry[];
+}
