@@ -7,8 +7,7 @@ Clique [aqui](https://renan-saraiva.github.io/covid-view) para acessar a aplica�
 Incentivamos contribuições. Fique a vontade de sugerir qualquer contribuição ou de fazer evoluções e contribuir com pull requests.
 
 ## TODO
-- Criação da página de visualização de dados por países.
-- Criação da busca com autocomplete dos paises na página inicial.
+- Conclusão da página de visualização de dados por países.
 - Criação do gráfico com a evolução dos infectados por países. 
 
 ## Fonte de dados
