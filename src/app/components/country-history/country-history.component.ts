@@ -170,6 +170,12 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
   disposechart() {
     if (this.chartHistory)
       this.chartHistory.dispose();
+
+    if (this.chartCase)
+      this.chartCase.dispose();
+
+    if (this.chartDeath)
+      this.chartDeath.dispose();
   }
 
   ngOnDestroy() {
