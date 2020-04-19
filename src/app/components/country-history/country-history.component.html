@@ -1,14 +1,52 @@
-<div class="card">
-  <div class="overlay dark" *ngIf="isLoading">
-    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+<div class="row">
+  <div class="col-12">
+    <div class="card card-primary card-outline">
+      <div class="overlay dark" *ngIf="isLoadingHistory">
+        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+      </div>
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-line"></i>
+          Histórico de evolução
+        </h3>
+      </div>
+      <div class="card-body p-1">
+        <div id="history-chart"></div>      
+      </div>
+    </div>
   </div>
-  <div class="card-header ui-sortable-handle" style="cursor: move;">
-    <h3 class="card-title">
-      <i class="fas fa-chart-line"></i>
-      Histórico
-    </h3>
-  </div>
-  <div class="card-body">
-    <div id="line-chart"></div>      
-  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card card-warning card-outline">
+      <div class="overlay dark" *ngIf="isLoadingCase">
+        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+      </div>
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-line"></i>
+          Casos por dia
+        </h3>
+      </div>
+      <div class="card-body p-1">
+        <div id="new-case-chart"></div>      
+      </div>
+    </div>
+  </div>  
+  <div class="col-lg-6">
+    <div class="card card-danger card-outline">
+      <div class="overlay dark" *ngIf="isLoadingDeath">
+        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+      </div>
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-line"></i>
+          Mortes por dia
+        </h3>
+      </div>
+      <div class="card-body p-1">
+        <div id="new-death-chart"></div>      
+      </div>
+    </div>
+  </div>  
 </div>

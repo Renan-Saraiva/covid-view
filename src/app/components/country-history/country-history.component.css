@@ -1,3 +1,7 @@
-#line-chart {
+#history-chart {
     height: 450px;
+}
+
+#new-case-chart, #new-death-chart {
+    height: 300px;
 }

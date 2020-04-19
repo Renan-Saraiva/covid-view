@@ -19,16 +19,24 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
   constructor(private zone: NgZone, private monitorService: CoronaMonitorService) { }
 
   @Input() country: string;
-  isLoading: boolean;
+  isLoadingHistory: boolean;
+  isLoadingCase: boolean;
+  isLoadingDeath: boolean;
   countryHistory = [];
-  chart: am4charts.XYChart;
+  chartHistory: am4charts.XYChart;
+  chartCase: am4charts.XYChart;
+  chartDeath: am4charts.XYChart;
 
   ngOnInit(): void {
     this.loadHistory();
   }
 
   loadHistory() {
-    this.isLoading = true;
+    
+    this.isLoadingHistory = true;
+    this.isLoadingCase = true;
+    this.isLoadingDeath = true;
+
     this.monitorService.GetCountryHistory(this.country).subscribe(
       countryHistory => {
         this.countryHistory = countryHistory;
@@ -38,28 +46,48 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
   }
 
   createPieComponent() {
-    this.chart = am4core.create("line-chart", am4charts.XYChart);
-    this.chart.events.on("ready", () => {
-      this.isLoading = false;
-    })
+    this.chartHistory = am4core.create("history-chart", am4charts.XYChart);
+    this.chartHistory.events.on("ready", () => {
+      this.isLoadingHistory = false;      
+    });
+
+    this.chartCase = am4core.create("new-case-chart", am4charts.XYChart);
+    this.chartCase.events.on("ready", () => {
+      this.isLoadingCase = false;      
+    });
+
+    this.chartDeath  = am4core.create("new-death-chart", am4charts.XYChart);
+    this.chartDeath.events.on("ready", () => {
+      this.isLoadingDeath = false;      
+    });
+
     this.zone.runOutsideAngular(() => {
-      // Create axes
-      let dateAxis = this.chart.xAxes.push(new am4charts.DateAxis());
-      let valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
-      this.chart.cursor = new am4charts.XYCursor();
-      dateAxis.renderer.minGridDistance = 50;
-      
-      // Increase contrast by taking evey second color
-      this.chart.colors.step = 2;
-      this.chart.data = this.countryHistory;
 
-      var createAxisAndSeries = (valuePropertie, name, opposite, bulletParameter) => {        
 
-        // if (this.chart.yAxes.indexOf(valueAxis) != 0) {
-        //   valueAxis.syncWithAxis = this.chart.yAxes.getIndex(0);
-        // }
+      var createChart = (chart: am4charts.XYChart) => {
+        let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        chart.cursor = new am4charts.XYCursor();
+        dateAxis.renderer.minGridDistance = 50;
         
-        let series = this.chart.series.push(new am4charts.LineSeries());
+        // Increase contrast by taking evey second color
+        chart.colors.step = 2;
+        chart.data = this.countryHistory;
+  
+        chart.legend = new am4charts.Legend();
+        chart.legend.position = "bottom";
+        chart.legend.scrollable = true;
+        
+        return valueAxis;
+      };
+
+      var valueAxisHistory = createChart(this.chartHistory);
+      var valueAxisCase = createChart(this.chartCase);
+      var valueAxisDeath = createChart(this.chartDeath);
+      
+      var createAxisAndSeries = (chart: am4charts.XYChart, valueAxis:am4charts.ValueAxis, valuePropertie: string, name: string, opposite:boolean, bulletParameter:string, color: am4core.Color = null) => {        
+          
+        let series = chart.series.push(new am4charts.LineSeries());
         series.dataFields.valueY = valuePropertie;
         series.dataFields.dateX = "update_on";
         series.strokeWidth = 2;
@@ -68,7 +96,10 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
         series.tooltipText = `${name}: [bold]{valueY}[/]`;
         series.tensionX = 0.8;
         series.showOnInit = true;
-        
+
+        if (color)
+          series.stroke = color;
+
         let interfaceColors = new am4core.InterfaceColorSet();
         let bullet;
         switch(bulletParameter) {
@@ -101,7 +132,13 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
             break;
           default:
             bullet = series.bullets.push(new am4charts.CircleBullet());
-            bullet.circle.stroke = interfaceColors.getFor("background");
+            if (color) {
+              bullet.circle.stroke = color;
+              bullet.circle.fill = am4core.color("white");
+            }
+            else
+              bullet.circle.stroke = interfaceColors.getFor("background");
+
             bullet.circle.strokeWidth = 2;
             break;
         }
@@ -112,14 +149,14 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
         valueAxis.renderer.labels.template.fill = series.stroke;
         valueAxis.renderer.opposite = opposite;
       }
-  
-      createAxisAndSeries("total_cases", "Total de Casos", false , "triangle");
-      createAxisAndSeries("total_recovered", "Recuperados", true, "circle");
-      createAxisAndSeries("total_deaths", "Mortos", false,"rectangle");
 
-      this.chart.legend = new am4charts.Legend();
-      this.chart.legend.position = "bottom";
-      this.chart.legend.scrollable = true;    
+      createAxisAndSeries(this.chartHistory, valueAxisHistory, "total_recovered", "Recuperados", false, "circle");
+      createAxisAndSeries(this.chartHistory, valueAxisHistory, "total_cases", "Total de Casos", false , "triangle");    
+      createAxisAndSeries(this.chartHistory, valueAxisHistory, "total_deaths", "Mortos", false,"rectangle");
+
+      
+      createAxisAndSeries(this.chartCase, valueAxisCase, "new_cases", "Novos casos", false , "circle", am4core.color("#ffc107"));
+      createAxisAndSeries(this.chartDeath, valueAxisDeath, "new_deaths", "Novas mortes", false , "circle", am4core.color("#dc3545"));    
     });
   }
 
@@ -131,8 +168,8 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
   }
 
   disposechart() {
-    if (this.chart)
-      this.chart.dispose();
+    if (this.chartHistory)
+      this.chartHistory.dispose();
   }
 
   ngOnDestroy() {
