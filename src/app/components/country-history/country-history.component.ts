@@ -45,6 +45,7 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
     this.zone.runOutsideAngular(() => {
       // Create axes
       let dateAxis = this.chart.xAxes.push(new am4charts.DateAxis());
+      let valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
       this.chart.cursor = new am4charts.XYCursor();
       dateAxis.renderer.minGridDistance = 50;
       
@@ -52,12 +53,11 @@ export class CountryHistoryComponent implements OnInit, OnDestroy {
       this.chart.colors.step = 2;
       this.chart.data = this.countryHistory;
 
-      var createAxisAndSeries = (valuePropertie, name, opposite, bulletParameter) => {
-        var valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis() as any);
+      var createAxisAndSeries = (valuePropertie, name, opposite, bulletParameter) => {        
 
-        if (this.chart.yAxes.indexOf(valueAxis) != 0) {
-          valueAxis.syncWithAxis = this.chart.yAxes.getIndex(0);
-        }
+        // if (this.chart.yAxes.indexOf(valueAxis) != 0) {
+        //   valueAxis.syncWithAxis = this.chart.yAxes.getIndex(0);
+        // }
         
         let series = this.chart.series.push(new am4charts.LineSeries());
         series.dataFields.valueY = valuePropertie;
