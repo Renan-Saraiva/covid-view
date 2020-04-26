@@ -1,35 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { ConfigService } from './services/config.service';
-import { AppHeaderComponent } from './layout/app-header/app-header.component';
-import { AppFooterComponent } from './layout/app-footer/app-footer.component';
-import { WorldStatusComponent } from './components/world-status/world-status.component';
-import { CountryComponent } from './pages/country/country.component';
-import { GoogleChartsModule } from 'angular-google-charts';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-import { CountriesService } from './services/countries.service';
-import { WorldViewComponent } from './components/world-view/world-view.component';
-import { TopAffectedCountriesComponent } from './components/top-affected-countries/top-affected-countries.component';
-import { AllCountriesTableComponent } from './components/all-countries-table/all-countries-table.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { RapidApiInterceptor } from './interceptors/rapid-api.interceptor';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CountryStatusComponent } from './components/country-status/country-status.component';
-import { CountryPieChartComponent } from './components/country-pie-chart/country-pie-chart.component';
-import { CountryTodayChangesComponent } from './components/country-today-changes/country-today-changes.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { CountryInputComponent } from './components/country-input/country-input.component';
 import { FormsModule } from '@angular/forms';
+
+//services
+import { CountriesService } from './services/countries.service';
+import { ConfigService } from './services/config.service';
+
+//interceptor
+import { RapidApiInterceptor } from './interceptors/rapid-api.interceptor';
+
+//app modules
+import { ComponentsModule } from './components/components.module';
+import { LayoutModule } from './layout/layout.module';
+
+//pages
 import { WorldComponent } from './pages/world/world.component';
-import { CountryHistoryComponent } from './components/country-history/country-history.component';
+import { CountryComponent } from './pages/country/country.component';
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -48,32 +40,17 @@ registerLocaleData(localePt, 'pt');
 @NgModule({
   declarations: [
     AppComponent,
-    AppHeaderComponent,
-    AppFooterComponent,
-    WorldStatusComponent,
     CountryComponent,
-    WorldViewComponent,
-    TopAffectedCountriesComponent,
-    AllCountriesTableComponent,
-    CountryStatusComponent,
-    CountryPieChartComponent,
-    CountryTodayChangesComponent,
-    CountryInputComponent,
-    WorldComponent,
-    CountryHistoryComponent
+    WorldComponent    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    GoogleChartsModule.forRoot(),
+    ComponentsModule,
+    LayoutModule,
+    HttpClientModule,  
     BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [
     ConfigService, {

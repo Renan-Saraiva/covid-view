@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoronaMonitorService } from 'src/app/services/corona-monitor.service';
-import { CasesByCountryContainer } from 'src/app/models/cases-by-country';
 import { CountriesService } from 'src/app/services/countries.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatCheckbox } from '@angular/material/checkbox';
 
 
 @Component({
