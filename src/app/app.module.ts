@@ -22,6 +22,7 @@ import { LayoutModule } from './layout/layout.module';
 //pages
 import { WorldComponent } from './pages/world/world.component';
 import { CountryComponent } from './pages/country/country.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const appConfig = (configService: ConfigService) => {
   return () => {
@@ -41,7 +42,8 @@ registerLocaleData(localePt, 'pt');
   declarations: [
     AppComponent,
     CountryComponent,
-    WorldComponent    
+    WorldComponent,
+    NotFoundComponent    
   ],
   imports: [
     BrowserModule,
